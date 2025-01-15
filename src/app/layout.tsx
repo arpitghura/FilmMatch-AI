@@ -27,23 +27,23 @@ const BebasNeue = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Discover Your Next Favorite Movie | CineMatch",
-  description: "Find your perfect movie recommendation based on your taste. Explore trending films, genres, and personalized picks. Start your movie journey now with CineMatch!",
-  keywords: "movie recommendations, trending movies, film suggestions, personalized movies, movie genres, best movies to watch, cinematch",
+  title: "Discover Your Next Favorite Movie | Filmmatch",
+  description: "Find your perfect movie recommendation based on your taste. Explore trending films, genres, and personalized picks. Start your movie journey now with filmmatch!",
+  keywords: "movie recommendations, trending movies, film suggestions, personalized movies, movie genres, best movies to watch, filmmatch",
   authors: [{ name: "Arpit Ghura" }],
   openGraph: {
-    title: "Discover Your Next Favorite Movie | CineMatch",
+    title: "Discover Your Next Favorite Movie | Filmmatch",
     description: "Find your perfect movie recommendation based on your taste. Explore trending films, genres, and personalized picks.",
     // images: [{ url: "" }],
-    url: "https://www.cinematch.vercel.app",
+    url: "https://www.filmmatch.vercel.app",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Discover Your Next Favorite Movie | CineMatch",
+    title: "Discover Your Next Favorite Movie | filmmatch",
     description: "Explore trending films and get personalized movie recommendations.",
     // images: "https://www.example.com/assets/twitter-image.jpg",
-    site: "@cinematch",
+    // site: "@filmmatch",
   },
   icons: {
     icon: '/favicon.ico',
