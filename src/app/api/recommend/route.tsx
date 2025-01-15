@@ -56,7 +56,7 @@ const fetchMovieDetails = async (
   return results;
 };
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json(
       { message: "Method not allowed" },
@@ -140,10 +140,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
     // const movieSuggestions = parseMovieSuggestions(inputString);
 
     return NextResponse.json({ movieData }, { status: 200 });
-  } catch (error: any) {
-    console.error("Error calling SambaNova API:", error.message || error);
+  } catch (error) {
+    const errorMessage = (error as any).message || "Internal Server Error";
+    console.error("Error calling SambaNova API:", errorMessage);
     return NextResponse.json(
-      { error: error.message || "Internal Server Error" },
+      { error: errorMessage },
       { status: 500 }
     );
   }

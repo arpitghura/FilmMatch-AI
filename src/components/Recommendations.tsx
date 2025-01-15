@@ -94,11 +94,6 @@ export interface Movie {
   Plot: string;
 }
 
-interface SmartRecommendationPanelProps {
-  recommendations?: Movie[];
-  title?: string;
-}
-
 const SmartRecommendationPanel = () => {
   const { recommendations, isSubmitted } = useMovieContext();
   const recommendationsForYou = recommendations?.map((movie, index) => ({
