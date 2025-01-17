@@ -27,6 +27,7 @@ const HeroSection = ({
     filters,
     setSubmitted,
     history,
+    setError,
   } = useMovieContext();
 
   const { toast } = useToast();
@@ -51,7 +52,7 @@ const HeroSection = ({
       // api call to fetch movie data
       const postData = {
         filters: {
-          title: search,
+          title: search.trim(),
           ...filters,
         },
       };
@@ -61,6 +62,7 @@ const HeroSection = ({
       //console.log(response.data);
       setRecommendations(response.data?.movieData);
     } catch (error) {
+      setError("Something went wrong. Please try again later.");
       console.error("Failed to fetch movie data: ", error);
     } finally {
       setSubmitted(false);
@@ -76,7 +78,7 @@ const HeroSection = ({
 
       {/* Content Container */}
       <div className="relative h-full max-w-7xl mx-auto mt-10 sm:mt-0 px-4 py-16 flex flex-col items-center justify-center gap-8">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-center bebas-neue-font tracking-wide gradient-text-animated">
+        <h1 className="text-5xl md:text-7xl font-bold text-center bebas-neue-font tracking-wide gradient-text-animated">
           Discover Your Next Favorite Movie
         </h1>
 
@@ -94,7 +96,7 @@ const HeroSection = ({
               <Input
                 type="text"
                 placeholder="Enter your last watched movie..."
-                className="pl-10 py-5 w-full text-lg rounded-lg"
+                className="pl-10 py-5 w-full text-base md:text-lg rounded-lg placeholder:text-sm sm:placeholder:text-base"
                 value={search}
                 onChange={handleSearchChange}
               />
@@ -118,8 +120,8 @@ const HeroSection = ({
               <span>Filters</span>
             </button>
           </div>
-          <div>
-            {/* Movie Search History if available */}
+          {/* Movie Search History if available */}
+          {/* <div>
             {history?.length > 0 && (
               <div className="flex flex-row gap-2 justify-between mt-4">
                 <div className="flex flex-row gap-1">
@@ -137,7 +139,7 @@ const HeroSection = ({
                   </button>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

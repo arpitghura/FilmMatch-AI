@@ -21,6 +21,8 @@ interface MovieContextType {
   setRecommendations: React.Dispatch<React.SetStateAction<Movie[]>>;
   isSubmitted: boolean;
   setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  error: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Define the structure of the filters
@@ -47,6 +49,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [history, setHistory] = useState<string[]>([]);
   const [recommendations, setRecommendations] = useState<Movie[]>([]);
   const [isSubmitted, setSubmitted] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   // Load search history from localStorage on initial load
   useEffect(() => {
@@ -93,7 +96,9 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         recommendations,
         setRecommendations,
         isSubmitted,
-        setSubmitted
+        setSubmitted,
+        error,
+        setError
       }}
     >
       {children}

@@ -62,7 +62,7 @@ const Home = () => {
 
       {/* Smart Recommendation Panel */}
       <div
-        className="max-w-7xl mx-auto px-4"
+        className="w-full md:max-w-7xl mx-auto px-4"
         id="recommendations"
         ref={recommendationsRef}
       >
@@ -70,11 +70,11 @@ const Home = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex-1">
           <MovieGrid onLoadMore={() => console.log("Loading more movies")} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

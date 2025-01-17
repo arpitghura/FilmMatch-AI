@@ -33,7 +33,7 @@ const fetchMovieDetails = async (
   for (const movie of movies) {
     try {
       const response = await fetch(
-        `https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=${apiKey}`
+        `https://www.omdbapi.com/?t=${movie.title}&apikey=${apiKey}`
       );
       const data = await response.json();
 
@@ -111,7 +111,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "system",
-          content: `Suggest top 4 movies based on the previously watched movie, genre, and industry (Hollywood, Bollywood, Tollywood). 
+          content: `Suggest top 3 movies based on the previously watched movie, genre, and industry (Hollywood, Bollywood, Tollywood). 
             Provide the suggestions in the following format, including only the movie title and/or IMDb ID:
             Suggestion:
             {
@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
     const movieData = await fetchMovieDetails(movieSuggestions);
     // const inputString =  "Avengers: Infinity Wars is a superhero film. Based on the genre and industry (Hollywood), here are two movie suggestions:\n\nSuggestion:\n{\n\"title\": \"The Avengers\",\n\"imdb_id\": \"tt0848228\"\n},\n{\n\"title\": \"Avengers: Endgame\",\n\"imdb_id\": \"tt4154756\"\n}";
     // const movieSuggestions = parseMovieSuggestions(inputString);
-
+    // console.log(chatCompletion.choices[0]);
     return NextResponse.json({ movieData }, { status: 200 });
   } catch (error) {
     const errorMessage = (error as any).message || "Internal Server Error";
