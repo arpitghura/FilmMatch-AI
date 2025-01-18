@@ -11,7 +11,7 @@ body {
 }
 
 .gradient-bg {
-  background: linear-gradient(to right, #8e2de2, #fc6767, #ffa177);
+  background: linear-gradient(to right, #8e2de2, #fc6767, #ffa277e1);
   background-size: 300% 300%;
   animation: gradient-animation 5s ease infinite;
 }
@@ -20,7 +20,7 @@ body {
   text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.06); /* Subtle shadow */
   /* background: linear-gradient(to right, #FF6A00, #FF8C42, #FFA000); */
   /* background: linear-gradient(to right, #FF512F, #FF7849, #FF9A8B); */
-  background: linear-gradient(to right, #8e2de2, #fc6767, #ffa177);
+  background: linear-gradient(to right, #8e2de2, #fc6767, #f09970);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

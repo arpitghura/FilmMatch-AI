@@ -134,10 +134,10 @@ const FilterSidebar = () => {
                   variant={
                     selectedIndustry === industry ? "default" : "outline"
                   }
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer text-gray-300 hover:bg-[#fc1666cb] ${
                     selectedIndustry === industry
-                      ? "bg-primary text-white"
-                      : "bg-muted"
+                      ? "bg-[#fc1666cb] text-dark"
+                      : "bg-gray-800"
                   }`}
                   onClick={() => handleIndustrySelect(industry)}
                 >
@@ -161,10 +161,10 @@ const FilterSidebar = () => {
                   variant={
                     selectedGenres.includes(genre) ? "default" : "outline"
                   }
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer text-gray-300 hover:bg-[#fc1666cb] ${
                     selectedGenres.includes(genre)
-                      ? "bg-primary text-white"
-                      : "bg-muted"
+                      ? "bg-[#fc1666cb] text-dark"
+                      : "bg-gray-800"
                   }`}
                   onClick={() => handleGenreSelect(genre)}
                 >

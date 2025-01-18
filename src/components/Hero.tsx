@@ -104,7 +104,7 @@ const HeroSection = ({
             <Button
               variant="default"
               onClick={handleSubmit}
-              className="bg-[#FC6767] py-5 px-5 text-base rounded-lg w-full sm:w-auto"
+              className="bg-[#fc6767e5] py-5 px-5 text-base rounded-lg w-full sm:w-auto"
             >
               Search
             </Button>
