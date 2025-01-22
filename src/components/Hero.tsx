@@ -1,4 +1,11 @@
 "use client";
+
+// Extend the Window interface to include dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 import React from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { Input } from "./ui/input";
@@ -61,12 +68,29 @@ const HeroSection = ({
       const response = await axios.post("/api/recommend", postData);
       //console.log(response.data);
       setRecommendations(response.data?.movieData);
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+       'event': 'search_movie',
+       'search_query': search,
+       'response': response.data?.movieData?.length > 0 ? 'success' : 'failure',
+       'chosen_filters': filters,
+       'history': history,
+      });
     } catch (error) {
       setError("Something went wrong. Please try again later.");
       console.error("Failed to fetch movie data: ", error);
     } finally {
       setSubmitted(false);
     }
+  };
+
+  const handleToggleFilters = () => {
+    setIsShowFilters(!isShowFilters);
+    window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+       'event': 'filter_clicked',
+       'filter_visibility': isShowFilters ? 'hidden' : 'visible',
+      });
   };
 
   return (
@@ -111,7 +135,8 @@ const HeroSection = ({
 
             {/* Filter Toggle */}
             <button
-              onClick={() => setIsShowFilters(!isShowFilters)}
+              onClick={handleToggleFilters}
+              id="filter-toggle"
               className="px-2 py-1 bg-transparent text-secondary-foreground rounded-lg hover:bg-primary/20 transition-colors flex flex-row items-center gap-2 w-fit"
             >
               <span>

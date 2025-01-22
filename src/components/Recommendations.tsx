@@ -115,16 +115,16 @@ const SmartRecommendationPanel = () => {
       <CardContent>
         {isSubmitted ? (
           <CircularLoader message="Please Wait... AI is finding the best movies for you." />
-        ) : recommendationsForYou?.length === 0 ? (
-          <p className="text-center text-lg mt-5 text-muted-foreground">
-            Search for movie to get recommendations
-          </p>
         ) : error !== "" ? (
           <p className="text-center text-lg mt-5 text-muted-foreground">
             {error}
           </p>
+        ) : recommendationsForYou?.length === 0 ? (
+          <p className="text-center text-lg mt-5 text-muted-foreground">
+            Search for movie to get recommendations
+          </p>
         ) : (
-          <ScrollArea className="w-full whitespace-nowrap">
+          <ScrollArea className="w-full whitespace-nowrap" id="movie-recommendations">
             <div className="flex flex-wrap sm:gap-x-2 gap-y-5 sm:px-2 sm:py-4 justify-center sm:justify-start items-center">
               {recommendationsForYou?.map((movie) => (
                 <div key={movie.id} className="shrink-0">

@@ -112,15 +112,10 @@ export async function POST(req: NextRequest) {
         {
           role: "system",
           content: `Suggest top 3 movies based on the previously watched movie, genre, and industry (Hollywood, Bollywood, Tollywood). 
-            Provide the suggestions in the following format, including only the movie title and/or IMDb ID:
-            Suggestion:
+            Strictly Provide the suggestions in the following format only for each movie recommendation, including only the movie title and/or IMDb ID:
             {
-            "title": "The Dark Knight",
-            "imdb_id": "tt0468569"
-            },
-            {
-            "title": "Inception",
-            "imdb_id": "tt1375666"
+              "title": "The Dark Knight",
+              "imdb_id": "tt0468569"
             }`,
         },
         {
