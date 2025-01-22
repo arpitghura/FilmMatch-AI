@@ -3,7 +3,7 @@ import { Inter, Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { MovieProvider } from "@/context/MovieContext";
 import { Toaster } from "@/components/ui/toaster";
-import { GTM_ID, gtmScript } from "@/lib/gtm";
+import { gTagScript, GTM_ID, GTM_TAG_ID, gtmScript } from "@/lib/gtm";
 import { hotJarScript } from "@/lib/hotjar";
 
 const geistSans = Geist({
@@ -79,6 +79,8 @@ export default function RootLayout({
           }}
         />
         <script dangerouslySetInnerHTML={{ __html: gtmScript }} />
+        <script dangerouslySetInnerHTML={{ __html: gTagScript }} />
+        <script src={`https://www.googletagmanager.com/gtag/js?id=${GTM_TAG_ID}`}></script>
       </head>
       <body
         className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${BebasNeue.variable} antialiased dark`}
