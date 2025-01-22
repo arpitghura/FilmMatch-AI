@@ -80,7 +80,7 @@ export default function RootLayout({
         />
         <script dangerouslySetInnerHTML={{ __html: gtmScript }} />
         <script dangerouslySetInnerHTML={{ __html: gTagScript }} />
-        <script src={`https://www.googletagmanager.com/gtag/js?id=${GTM_TAG_ID}`}></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GTM_TAG_ID}`}></script>
       </head>
       <body
         className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${BebasNeue.variable} antialiased dark`}
