@@ -5,6 +5,7 @@ import { MovieProvider } from "@/context/MovieContext";
 import { Toaster } from "@/components/ui/toaster";
 import { gTagScript, GTM_ID, GTM_TAG_ID, gtmScript } from "@/lib/gtm";
 import { hotJarScript } from "@/lib/hotjar";
+import CookieBanner from "@/components/CookiesConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -92,6 +93,7 @@ export default function RootLayout({
           style={{ display: "none", visibility: "hidden" }}
         />
         <MovieProvider>{children}</MovieProvider>
+        <CookieBanner/>
         <Toaster />
       </body>
     </html>
