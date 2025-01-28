@@ -5,7 +5,7 @@ import { getLocalStorage, setLocalStorage } from "@/lib/storageHelper";
 import { useState, useEffect } from "react";
 
 export default function CookieBanner() {
-  const [cookieConsent, setCookieConsent] = useState(false);
+  const [cookieConsent, setCookieConsent] = useState(true);
 
   useEffect(() => {
     const storedCookieConsent = getLocalStorage("cookie_consent", null);
@@ -33,12 +33,12 @@ export default function CookieBanner() {
   }, []);
   return (
     <div
-      className={`my-5 mx-auto max-w-max md:max-w-screen-sm fixed bottom-0 left-0 right-0 
-                  flex px-3 md:px-4 py-2 justify-between items-center flex-col sm:flex-row 
-                  gap-4 bg-gray-700 rounded-lg shadow z-50
+      className={`mx-auto max-w-max md:max-w-screen-sm fixed bottom-0 left-0 right-0 
+                  flex px-3 md:px-4 py-2 justify-between flex-row 
+                  gap-4 bg-gray-800 rounded-t-lg shadow z-50
                   ${cookieConsent !== null ? "hidden" : "flex"}`}
     >
-      <div className="text-center text-white-200">
+      <div className="text-sm  text-gray-200">
         {/* <Link href="/info/cookies"> */}
           <p>
             We use cookies on our site to improve your experience.
@@ -48,12 +48,12 @@ export default function CookieBanner() {
 
       {/* close button to unmount the componemt */}
       <button
-        className="text-white-200"
+        className="text-gray-200 text-sm"
         onClick={() => setCookieConsent(true)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-5 w-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
