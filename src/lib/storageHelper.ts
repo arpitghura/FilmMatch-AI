@@ -11,3 +11,7 @@ export function getLocalStorage(key: string, defaultValue:any){
 export function setLocalStorage(key: string, value:any){
     localStorage.setItem(key, JSON.stringify(value));
 }
+
+export function removeLocalStorage(key: string){
+    localStorage.removeItem(key);
+}
