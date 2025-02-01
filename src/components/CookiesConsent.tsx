@@ -25,9 +25,9 @@ export default function CookieBanner() {
 
   useEffect(()=> {
     
-    // window.gtag("consent", "update", {
-    //   analytics_storage: 'granted',
-    // });
+    window.gtag("consent", "update", {
+      analytics_storage: 'granted',
+    });
 
     setLocalStorage("cookie_consent", cookieConsent);
   }, []);
