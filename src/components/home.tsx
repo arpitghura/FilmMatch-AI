@@ -4,17 +4,14 @@ import HeroSection from "./Hero";
 import FilterSidebar from "./Filter";
 import MovieGrid from "./MovieGrid";
 import SmartRecommendationPanel from "./Recommendations";
+import Header from "./Header";
+import { LoginPromptDialog } from "./LoginPromptDialog";
 
 const Home = () => {
   const [isShowFilters, setIsShowFilters] = useState(false);
+  const [searchTriggered, setSearchTriggered] = useState(false);
 
   const recommendationsRef = useRef<HTMLDivElement | null>(null);
-
-  // const scrollToRecommendations = () => {
-  //     if (recommendationsRef.current) {
-  //         recommendationsRef.current.scrollIntoView({ behavior: "smooth" });
-  //     }
-  // };
 
   const scrollToRecommendations = () => {
     if (recommendationsRef.current) {
@@ -45,13 +42,16 @@ const Home = () => {
     }
   };
 
+
   return (
-    <div className="min-h-screen w-full bg-background">
+    <div className="min-h-full w-full bg-background dark:bg-dark-background">
+      <Header />
       {/* Hero Section */}
       <HeroSection
         setIsShowFilters={setIsShowFilters}
         isShowFilters={isShowFilters}
         scrollToRecommendations={scrollToRecommendations}
+        setSearchTriggered={setSearchTriggered}
       />
 
       {isShowFilters && (
@@ -62,7 +62,7 @@ const Home = () => {
 
       {/* Smart Recommendation Panel */}
       <div
-        className="w-full md:max-w-7xl mx-auto px-4"
+        className="w-full md:max-w-7xl mx-auto px-4 h-full"
         id="recommendations"
         ref={recommendationsRef}
       >
@@ -70,11 +70,13 @@ const Home = () => {
       </div>
 
       {/* Main Content Area */}
-      {/* <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex-1">
-          <MovieGrid onLoadMore={() => console.log("Loading more movies")} />
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* <div className="flex-1"> */}
+          <MovieGrid />
         </div>
-      </div> */}
+      {/* </div> */}
+
+      {/* <LoginPromptDialog searchTriggered={searchTriggered}  /> */}
     </div>
   );
 };

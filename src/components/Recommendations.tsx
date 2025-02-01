@@ -96,53 +96,54 @@ export interface Movie {
 
 const SmartRecommendationPanel = () => {
   const { recommendations, isSubmitted, error } = useMovieContext();
-  const recommendationsForYou = recommendations?.map((movie, index) => ({
-    id: index.toString(), // Generate an ID
-    title: movie.Title,
-    year: movie.Year,
-    rating: movie.imdbRating,
-    posterUrl: movie.Poster,
-    description: movie.Plot,
-  }));
+
+  console.log({recommendations});
+
+  if (isSubmitted) {
+    return (
+      <CircularLoader message="Please Wait... AI is finding the best movies for you." />
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-lg mt-5 text-muted-foreground">
+        {error}
+      </div>
+    );
+  }
 
   return (
-    <Card className="w-full min-h-[200px] bg-background border-t my-5">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-xl font-semibold">
-          Recommended for You
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        {isSubmitted ? (
-          <CircularLoader message="Please Wait... AI is finding the best movies for you." />
-        ) : error !== "" ? (
-          <p className="text-center text-lg mt-5 text-muted-foreground">
-            {error}
-          </p>
-        ) : recommendationsForYou?.length === 0 ? (
-          <p className="text-center text-lg mt-5 text-muted-foreground">
-            Search for movie to get recommendations
-          </p>
-        ) : (
-          <ScrollArea className="w-full whitespace-nowrap" id="movie-recommendations">
+    recommendations?.length !== 0 && (
+      <Card className="w-full min-h-[200px] bg-secondary border-t my-5">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-xl font-semibold">
+            Recommended for You
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea
+            className="w-full whitespace-nowrap"
+            id="movie-recommendations"
+          >
             <div className="flex flex-wrap sm:gap-x-2 gap-y-5 sm:px-2 sm:py-4 justify-center sm:justify-start items-center">
-              {recommendationsForYou?.map((movie) => (
-                <div key={movie.id} className="shrink-0">
+              {recommendations?.map((movie, index) => (
+                <div key={index} className="shrink-0">
                   <MovieCard
-                    title={movie.title}
-                    year={movie.year}
-                    rating={movie.rating}
-                    posterUrl={movie.posterUrl}
-                    description={movie.description}
+                    title={movie.Title}
+                    year={movie.Year}
+                    rating={movie.imdbRating}
+                    posterUrl={movie.Poster}
+                    description={movie.Plot}
                   />
                 </div>
               ))}
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
-        )}
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    )
   );
 };
 

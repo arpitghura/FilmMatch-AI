@@ -19,6 +19,8 @@ interface MovieContextType {
   deleteMovieHistory: () => void;
   recommendations: Movie[];
   setRecommendations: React.Dispatch<React.SetStateAction<Movie[]>>;
+  searchedResult: Movie[];
+  setSearchedResult: React.Dispatch<React.SetStateAction<Movie[]>>;
   isSubmitted: boolean;
   setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
   error: string;
@@ -48,6 +50,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [filters, setFilters] = useState<Filters>({});
   const [history, setHistory] = useState<string[]>([]);
   const [recommendations, setRecommendations] = useState<Movie[]>([]);
+  const [searchedResult, setSearchedResult] = useState<Movie[]>([]);
   const [isSubmitted, setSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -57,25 +60,28 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       localStorage.getItem("movieHistory") || "[]"
     );
     setHistory(savedHistory);
+
+    const savedRecommendations = JSON.parse(
+      localStorage.getItem("searchedResult") || "[]"
+    );
+    setSearchedResult(savedRecommendations);
   }, []);
 
-  // Save search history to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("movieHistory", JSON.stringify(history));
   }, [history]);
 
-  // Save recommendations to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem(
-      "movieRecommendations",
-      JSON.stringify(recommendations)
-    );
+    localStorage.setItem("movieRecommendations", JSON.stringify(recommendations));
   }, [recommendations]);
 
+  useEffect(() => {
+    localStorage.setItem("searchedResult", JSON.stringify(searchedResult));
+  }, [searchedResult]);
+
   const addMovieToHistory = (movie: string) => {
-    // Ensure history only keeps unique movie searches
     if (!history.includes(movie)) {
-      setHistory((prevHistory) => [movie, ...prevHistory].slice(0, 3)); // Keep only the latest 5 searches
+      setHistory((prevHistory) => [movie, ...prevHistory].slice(0, 4)); // Keep only the latest 5 searches
     }
   };
 
@@ -95,6 +101,8 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         deleteMovieHistory,
         recommendations,
         setRecommendations,
+        searchedResult,
+        setSearchedResult,
         isSubmitted,
         setSubmitted,
         error,

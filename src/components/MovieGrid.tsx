@@ -1,50 +1,58 @@
 import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import MovieCard from "./MovieCard";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { useMovieContext } from "@/context/MovieContext";
+import { CircularLoader } from "./ui/Loader";
+import { Trash2 } from "lucide-react";
 
-interface Movie {
+export interface Movie {
   id: string;
-  title: string;
-  year: string;
-  rating: string;
-  duration: string;
-  posterUrl: string;
-  description: string;
+  Title: string;
+  Year: string;
+  imdbRating: string;
+  Poster: string;
+  Plot: string;
 }
 
-interface MovieGridProps {
-  movies?: Movie[];
-  onLoadMore?: () => void;
-}
+const MovieGrid = () => {
+  const { searchedResult, setSearchedResult } = useMovieContext();
 
-
-const MovieGrid = ({
-  movies,
-}: MovieGridProps) => {
   return (
-    <div className="w-full h-fit bg-background p-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-        {movies?.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            title={movie.title}
-            year={movie.year}
-            rating={movie.rating}
-            // duration={movie.duration}
-            posterUrl={movie.posterUrl}
-            description={movie.description}
-            // onQuickView={() => console.log(`Quick view for ${movie.title}`)}
-          />
-        ))}
-      </div>
-      <div className="w-full flex justify-center mt-8">
-        {/* <button
-          onClick={onLoadMore}
-          className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+    <Card className="w-full min-h-[200px] bg-inherit border-t my-5">
+      <CardHeader className="pb-2 flex flex-row justify-between items-center">
+        <CardTitle className="text-xl font-semibold">Your Search Recommendations</CardTitle>
+        <div className="text-muted-foreground text-sm flex items-center cursor-pointer gap-2" onClick={() => setSearchedResult([])}>
+          <Trash2 className="h-5 w-5" /> Clear All Search Results 
+        </div>
+      </CardHeader>
+      <CardContent>
+        <ScrollArea
+          className="w-full whitespace-nowrap"
         >
-          Load More
-        </button> */}
-      </div>
-    </div>
+          <div className="flex flex-wrap sm:gap-x-2 gap-y-5 sm:px-2 sm:py-4 justify-center sm:justify-start items-center">
+            {searchedResult?.length > 0 ? (
+              searchedResult?.map((movie, index) => (
+                <div key={index} className="shrink-0">
+                  <MovieCard
+                    title={movie.Title}
+                    year={movie.Year}
+                    rating={movie.imdbRating}
+                    posterUrl={movie.Poster}
+                    description={movie.Plot}
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-lg mt-5 text-muted-foreground">
+                No search results found
+              </p>
+            )}
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
+      </CardContent>
+    </Card>
   );
 };
 
