@@ -61,6 +61,7 @@ const HeroSection = ({
       });
       return;
     }
+    setIsShowFilters(false);
     setSubmitted(true);
 
     try {
